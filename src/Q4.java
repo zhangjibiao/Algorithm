@@ -1,18 +1,18 @@
 import java.util.Arrays;
 
-public class Q3 {
-    public static void insertiontSort(int[] arr){
+public class Q4 {
+    public static void selectionSort(int[] arr){
 
         if (null==arr || arr.length<2) return;
 
-        for (int i = 1; i < arr.length; i++) { //i为当前待排序的数的位置
-            for (int j = i; j > 0; j--) {
-                if(arr[j]>=arr[j-1]){
-                    break;
-                }else{
-                    swap(arr,j,j-1);
+        for (int i = 0; i < arr.length-1; i++) { //从i到n中选最小的数，所以i只需要到n-1
+            int minIndex=i;
+            for (int j = i; j < arr.length; j++) {//找到最小的数的下标
+                if(arr[minIndex] >= arr[j]){
+                    minIndex = j;
                 }
             }
+            swap(arr, i, minIndex);
         }
     }
 
@@ -32,7 +32,6 @@ public class Q3 {
     //for test
     public static int[] generateRandomArray(int maxLength, int maxValue){
         int[] arr = new int[(int) ((maxLength+1) * Math.random())];//随机数组大小：
-        //TODO: 验证0数组大小
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) ((maxValue+1) * Math.random()) - (int) ((maxValue) * Math.random()) ;
         }
@@ -89,7 +88,7 @@ public class Q3 {
             int[] arr1 = generateRandomArray(maxLength, maxValue);
             int[] arr2 = copyArr(arr1);
 
-            insertiontSort(arr1);
+            selectionSort(arr1);
             comparator(arr2);
             if (!isEqual(arr1, arr2)) {
                 successd = false;
